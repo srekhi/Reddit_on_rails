@@ -1,5 +1,11 @@
 <h1>Sub show page</h1>
 Title: <%= @sub.title %> <br>
 Description: <%= @sub.description %> <br>
+<ul> Associated Posts
+<% @sub.posts.each do |post| %>
+<li> <%=link_to post.title, post_url(post) %></li>
+<% end %>
+</ul>
+<br><br>
 <%= link_to 'Edit this sub', edit_sub_url(@sub), method: :get %>
-<%= link_to 'Make a new post', new_sub_url(@sub), method: :get %>
+<%= link_to 'Make a new post', new_post_url, method: :get %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RedditOnRails</title>
+    <title>SunnyReddit</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -10,13 +10,18 @@
 
   <body>
     <% if flash[:errors] %>
+    Validation Issues: <br>
     <% flash[:errors].each do |error| %>
     <%= error %>
+    <br>
     <% end %>
     <% end %>
 
     <% if current_user %>
     <%= button_to 'Sign out', session_url, method: :delete %>
+    <% else %>
+    <%= link_to 'Sign in', new_session_url, method: :get %>
+
     <% end %>
     <%= yield %>
   </body>
