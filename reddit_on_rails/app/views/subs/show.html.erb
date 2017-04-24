@@ -1,2 +1,5 @@
-<h1>Subs#show</h1>
-<p>Find me in app/views/subs/show.html.erb</p>
+<h1>Sub show page</h1>
+Title: <%= @sub.title %> <br>
+Description: <%= @sub.description %> <br>
+<%= link_to 'Edit this sub', edit_sub_url(@sub), method: :get %>
+<%= link_to 'Make a new post', new_sub_url(@sub), method: :get %>

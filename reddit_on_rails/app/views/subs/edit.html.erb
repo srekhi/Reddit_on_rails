@@ -1,2 +1,9 @@
-<h1>Subs#edit</h1>
-<p>Find me in app/views/subs/edit.html.erb</p>
+<h1>Edit Subforum</h1>
+<form class="" action="<%=subs_url%>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <label for="title"></label>
+  <input id="title" type="text" name="sub[title]" placeholder="Title" value="<%=@sub.title%>">
+  <label for="description"></label>
+  <input id="description" type="text" name="sub[description]" placeholder="description" value="<%=@sub.description%>">
+  <input type="submit" value="Edit">
+</form>

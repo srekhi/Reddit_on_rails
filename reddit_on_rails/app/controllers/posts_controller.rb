@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :verify_post_owner
+  before_action :verify_post_owner, only: [:update, :destroy]
 
   def new
     render :new
@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   end
 
   def update
+    p "in update"
     @post = Post.find(id: params[:id])
     if @post.update_attributes(post_params)
       redirect_to sub_url(@post.sub)
@@ -32,9 +33,9 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(id: params[:id])
-    sub = @post.sub
+    @sub = @post.sub
     @post.destroy
-    redirect_to sub_url(sub)
+    redirect_to sub_url(@sub)
   end
 
   def post_params
@@ -42,8 +43,8 @@ class PostsController < ApplicationController
   end
 
   private
-  def verify_post_owner
-    unless post.author == current_user
+  def verify_post_owner #does this have access to params? or inst vars?
+    unless @post.author == current_user
       flash.now[:errors] = ["You must be the author of the post to edit or update."]
       render :edit
     end
