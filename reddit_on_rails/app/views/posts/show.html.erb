@@ -1,6 +1,9 @@
 Title: <%= @post.title %> <br><br>
-<%= link_to 'New Comment', new_post_comment_url(@post) %> <br>
-
-<% @top_level_comments.each do |parent_comment| %>
-<%= render "comments/comments.erb", parent_comment: parent_comment %>
+<%= link_to 'New Comment', new_post_comment_url(@post) %> <br><br>
+<ul>
+<% @all_comments.each do |comment| %>
+<% if comment.parent_comment_id.nil? %>
+<%= render "comments/comments.erb", all_comments: @all_comments, parent_comment: comment %>
+<% end %>
+</ul>
 <% end %>

@@ -1,6 +1,13 @@
-<%= link_to parent_comment.content, comment_url(parent_comment) %>
- <% parent_comment.child_comments.each do |child| %>
- <ul> Replies:
-   <li> <%= child.content %></li>
- <% end %>
- </ul>
+<%= link_to parent_comment.content, comment_url(parent_comment) %> <br>
+Author Username: <%= parent_comment.author.username %> <br>
+Created at: <%= parent_comment.created_at %> <br>
+
+<br><br>
+<% all_comments.each do |child_comment| %>
+
+<% if child_comment.parent_comment_id == parent_comment.id %>
+<li>
+<%= render "comments/comments.erb", all_comments: all_comments, parent_comment: child_comment %>
+</li>
+<% end %>
+<% end %>

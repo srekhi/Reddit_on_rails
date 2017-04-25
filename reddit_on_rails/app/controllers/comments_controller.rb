@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     # @comment.post_id = params[:post_id]
     parent_comment_id = comment_params[:parent_comment_id]
+    @comment.post_id = Comment.find_by(id: parent_comment_id).post_id
     @comment.parent_comment_id = parent_comment_id
     @comment.author = current_user
     if @comment.valid?

@@ -39,8 +39,10 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
-    @top_level_comments = @post.comments.where(parent_comment_id: nil)
-    @comments = @post.comments
+    @all_comments = @post.comments.includes(:author) # => first query.
+    # debugger
+    # @top_level_comments = @post.comments.where(parent_comment_id: nil)
+    # @comments = @post.comments
     render :show
   end
 

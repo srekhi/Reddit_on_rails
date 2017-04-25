@@ -35,4 +35,6 @@ class Post < ApplicationRecord
     foreign_key: :post_id,
     class_name: :Comment
 
+  
+
 end
