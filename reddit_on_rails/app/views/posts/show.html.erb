@@ -1,10 +1,6 @@
 Title: <%= @post.title %> <br><br>
-<%= link_to 'New Comment', new_post_comment_url(@post) %>
-<% @top_level_comments.each do |comment| %>
-<%= link_to comment.content, comment_url(comment) %>
-<ul> Replies:
-<% comment.child_comments.each do |child| %>
-  <li>child.content</li>
-</ul>
-<% end %>
+<%= link_to 'New Comment', new_post_comment_url(@post) %> <br>
+
+<% @top_level_comments.each do |parent_comment| %>
+<%= render "comments/comments.erb", parent_comment: parent_comment %>
 <% end %>

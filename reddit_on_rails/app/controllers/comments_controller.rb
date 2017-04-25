@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     # @comment.post_id = params[:post_id]
+    parent_comment_id = comment_params[:parent_comment_id]
+    @comment.parent_comment_id = parent_comment_id
     @comment.author = current_user
     if @comment.valid?
       @comment.save
@@ -13,7 +15,6 @@ class CommentsController < ApplicationController
   end
 
   def new
-    # fail
     @post_id = params[:post_id]
     render :new
   end
@@ -23,8 +24,14 @@ class CommentsController < ApplicationController
     render :show
   end
 
+  def destroy
+    @comment = Comment.find_by(id: params[:id])
+    @comment.destroy
+    redirect_to post_url(@comment)
+  end
+
 
   def comment_params
-    params.require(:comment).permit(:content, :post_id)
+    params.require(:comment).permit(:content, :post_id, :parent_comment_id)
   end
 end
